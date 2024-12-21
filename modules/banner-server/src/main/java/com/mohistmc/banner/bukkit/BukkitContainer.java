@@ -32,6 +32,11 @@ public class BukkitContainer {
     }
 
     public static CraftInventory createInv(Player containerOwner, AbstractContainerMenu container) {
+        // Banner start - fix owner NPE
+        if (containerOwner == null) {
+            containerOwner = BukkitSnapshotCaptures.getContainerOwner();
+        }
+        // Banner end
         return new CraftInventory(new ContainerInvWrapper(container, containerOwner));
     }
 
