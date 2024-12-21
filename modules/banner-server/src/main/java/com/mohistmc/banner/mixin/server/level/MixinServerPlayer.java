@@ -413,6 +413,13 @@ public abstract class MixinServerPlayer extends Player implements InjectionServe
 
     }
 
+    @Inject(method = "sendSystemMessage(Lnet/minecraft/network/chat/Component;Z)V", at = @At("HEAD"), cancellable = true)
+    public void banner$sendSystemMessage(CallbackInfo ci) {
+        if (this.connection == null) {
+            ci.cancel();
+        }
+    }
+
     @Override
     public void setPlayerWeather(WeatherType type, boolean plugin) {
         if (!plugin && this.weather != null) {
