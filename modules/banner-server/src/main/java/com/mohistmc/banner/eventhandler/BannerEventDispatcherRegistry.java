@@ -14,6 +14,6 @@ public class BannerEventDispatcherRegistry {
         LevelEventDispatcher.dispatchLevel();
         PlayerEventDispatcher.dispatcherPlayer();
         EntityEventDispatcher.dispatchEntityEvent();
-        //FabricToBukkitEventDispatcher.dispatchFabric2Bukkit();
+        FabricToBukkitEventDispatcher.dispatchFabric2Bukkit();
     }
 }

@@ -438,6 +438,9 @@ public abstract class MixinLevel implements LevelAccessor, AutoCloseable, Inject
 
     @Inject(method = "getBlockEntity", cancellable = true, at = @At(value = "HEAD"))
     private void banner$getCaptureBlockEntity(BlockPos blockPos, CallbackInfoReturnable<BlockEntity> cir) {
+        if (blockPos == null) {
+            cir.setReturnValue(null);
+        }
         if (this.capturedTileEntities.containsKey(blockPos)) {
             cir.setReturnValue(this.capturedTileEntities.get(blockPos));
         }
