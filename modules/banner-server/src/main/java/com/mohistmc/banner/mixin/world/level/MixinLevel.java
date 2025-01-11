@@ -99,6 +99,8 @@ public abstract class MixinLevel implements LevelAccessor, AutoCloseable, Inject
 
     @Shadow @Nullable public abstract MinecraftServer getServer();
 
+    @Shadow public abstract RegistryAccess registryAccess();
+
     @Unique
     private CraftWorld world;
     @Unique
@@ -471,6 +473,7 @@ public abstract class MixinLevel implements LevelAccessor, AutoCloseable, Inject
 
     @Override
     public BlockEntity getBlockEntity(BlockPos blockposition, boolean validate) {
+        if (blockposition == null) return null;
         // CraftBukkit start
         if (capturedTileEntities.containsKey(blockposition)) {
             return capturedTileEntities.get(blockposition);

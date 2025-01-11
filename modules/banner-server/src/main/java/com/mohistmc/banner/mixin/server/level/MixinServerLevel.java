@@ -196,7 +196,9 @@ public abstract class MixinServerLevel extends Level implements WorldGenLevel, I
         }
         this.uuid = WorldUUID.getUUID(levelStorageAccess.getDimensionPath(this.dimension()).toFile());
         this.getWorldBorder().banner$setWorld((ServerLevel) (Object) this);
-        this.K.setWorld((ServerLevel) (Object) this);
+        if (K != null) {
+            K.setWorld((ServerLevel) (Object) this);
+        }
     }
 
     @Redirect(method = "<init>", at = @At(value = "INVOKE",
