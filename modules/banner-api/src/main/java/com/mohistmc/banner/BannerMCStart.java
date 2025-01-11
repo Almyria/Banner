@@ -4,11 +4,10 @@ import com.mohistmc.banner.config.BannerConfigUtil;
 import com.mohistmc.banner.util.EulaUtil;
 import com.mohistmc.banner.util.I18n;
 import com.mohistmc.i18n.i18n;
+import java.util.Scanner;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Scanner;
 
 public class BannerMCStart {
 

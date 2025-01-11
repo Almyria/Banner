@@ -3,6 +3,7 @@ package org.bukkit.craftbukkit.v1_20_R1.entity;
 import com.google.common.base.Preconditions;
 import com.mohistmc.banner.bukkit.BukkitMethodHooks;
 import com.mohistmc.banner.fabric.BukkitRegistry;
+import java.util.Locale;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.monster.ZombieVillager;
@@ -16,8 +17,6 @@ import org.bukkit.craftbukkit.v1_20_R1.util.CraftLocation;
 import org.bukkit.craftbukkit.v1_20_R1.util.CraftNamespacedKey;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-
-import java.util.Locale;
 
 public class CraftVillager extends CraftAbstractVillager implements Villager {
 

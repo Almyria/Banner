@@ -1,14 +1,14 @@
 package org.spigotmc;
 
+import com.mohistmc.banner.bukkit.BukkitMethodHooks;
+import com.mohistmc.banner.config.BannerConfig;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MonitorInfo;
 import java.lang.management.ThreadInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.mohistmc.banner.bukkit.BukkitMethodHooks;
-import com.mohistmc.banner.config.BannerConfig;
 import org.bukkit.Bukkit;
+
 
 import static org.bukkit.Bukkit.shutdown;
 

@@ -5,6 +5,11 @@ import com.mohistmc.banner.bukkit.BukkitFieldHooks;
 import com.mohistmc.banner.bukkit.BukkitMethodHooks;
 import com.mohistmc.banner.bukkit.CraftCustomContainer;
 import com.mohistmc.banner.fabric.BukkitRegistry;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -64,12 +69,6 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class CraftBlock implements Block {
     private final net.minecraft.world.level.LevelAccessor world;

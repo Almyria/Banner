@@ -6,13 +6,12 @@ import com.mohistmc.banner.stackdeobf.mappings.CachedMappings;
 import com.mohistmc.banner.stackdeobf.mappings.providers.MojangMappingProvider;
 import com.mohistmc.banner.stackdeobf.util.RemappingRewritePolicy;
 import com.mohistmc.banner.util.I18n;
+import java.util.List;
+import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
-
-import java.util.List;
-import java.util.Set;
 
 public class BannerStackDeobfMixinPlugin implements IMixinConfigPlugin {
 

@@ -1,6 +1,11 @@
 package org.bukkit.craftbukkit.v1_20_R1;
 
 import com.google.common.base.Preconditions;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.stream.Stream;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -20,12 +25,6 @@ import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.stream.Stream;
 
 public class CraftRegistry<B extends Keyed, M> implements Registry<B> {
 

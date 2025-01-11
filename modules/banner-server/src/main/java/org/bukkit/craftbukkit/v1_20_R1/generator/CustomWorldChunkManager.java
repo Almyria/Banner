@@ -2,6 +2,9 @@ package org.bukkit.craftbukkit.v1_20_R1.generator;
 
 import com.google.common.base.Preconditions;
 import com.mojang.serialization.Codec;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Climate;
@@ -9,10 +12,6 @@ import org.bukkit.block.Biome;
 import org.bukkit.craftbukkit.v1_20_R1.block.CraftBlock;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.WorldInfo;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
 
 public class CustomWorldChunkManager extends BiomeSource {
 

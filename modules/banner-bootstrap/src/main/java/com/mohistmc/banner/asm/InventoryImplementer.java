@@ -1,5 +1,6 @@
 package com.mohistmc.banner.asm;
 
+import java.lang.reflect.Modifier;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
@@ -13,8 +14,6 @@ import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
-
-import java.lang.reflect.Modifier;
 
 public class InventoryImplementer implements Implementer {
 

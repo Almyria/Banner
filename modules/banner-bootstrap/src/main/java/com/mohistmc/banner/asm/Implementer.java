@@ -1,13 +1,12 @@
 package com.mohistmc.banner.asm;
 
+import java.lang.reflect.Modifier;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.InsnList;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
-
-import java.lang.reflect.Modifier;
 
 public interface Implementer {
 

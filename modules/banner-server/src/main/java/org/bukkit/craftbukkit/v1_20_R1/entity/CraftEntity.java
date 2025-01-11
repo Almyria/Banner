@@ -16,6 +16,9 @@ import com.mohistmc.banner.bukkit.entity.MohistModsTameableEntity;
 import com.mohistmc.banner.bukkit.entity.MohistModsThrowableEntity;
 import com.mohistmc.banner.bukkit.entity.MohistModsThrowableProjectile;
 import com.mohistmc.banner.config.BannerConfig;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -99,10 +102,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
-
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 public abstract class CraftEntity implements org.bukkit.entity.Entity {
     private static PermissibleBase perm;

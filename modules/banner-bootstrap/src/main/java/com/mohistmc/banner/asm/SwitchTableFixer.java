@@ -1,5 +1,8 @@
 package com.mohistmc.banner.asm;
 
+import java.lang.reflect.Modifier;
+import java.util.Set;
+import java.util.function.Function;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -14,10 +17,6 @@ import org.objectweb.asm.tree.LdcInsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.TryCatchBlockNode;
-
-import java.lang.reflect.Modifier;
-import java.util.Set;
-import java.util.function.Function;
 
 public class SwitchTableFixer implements Implementer, Function<byte[], byte[]> {
 

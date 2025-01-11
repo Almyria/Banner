@@ -1,6 +1,7 @@
 package org.bukkit.craftbukkit.v1_20_R1.block;
 
 import com.google.common.collect.ImmutableMap;
+import java.util.Map;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import org.bukkit.World;
@@ -8,8 +9,6 @@ import org.bukkit.block.Furnace;
 import org.bukkit.craftbukkit.v1_20_R1.inventory.CraftInventoryFurnace;
 import org.bukkit.inventory.CookingRecipe;
 import org.bukkit.inventory.FurnaceInventory;
-
-import java.util.Map;
 
 public abstract class CraftFurnace<T extends AbstractFurnaceBlockEntity> extends CraftContainer<T> implements Furnace {
 

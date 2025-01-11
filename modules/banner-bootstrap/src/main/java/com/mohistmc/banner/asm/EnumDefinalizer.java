@@ -1,12 +1,11 @@
 package com.mohistmc.banner.asm;
 
 
+import java.lang.reflect.Modifier;
+import java.util.Set;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
-
-import java.lang.reflect.Modifier;
-import java.util.Set;
 
 public class EnumDefinalizer implements Implementer {
 

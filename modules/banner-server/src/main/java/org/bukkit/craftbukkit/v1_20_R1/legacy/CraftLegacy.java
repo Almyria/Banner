@@ -4,6 +4,12 @@ import com.google.common.base.Preconditions;
 import com.mohistmc.banner.bukkit.BukkitMethodHooks;
 import com.mohistmc.banner.fabric.BukkitRegistry;
 import com.mojang.serialization.Dynamic;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -25,13 +31,6 @@ import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_20_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * This class may seem unnecessarily slow and complicated/repetitive however it

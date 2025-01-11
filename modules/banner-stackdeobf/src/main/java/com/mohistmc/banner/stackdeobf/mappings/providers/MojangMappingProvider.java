@@ -5,7 +5,6 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mohistmc.banner.BannerMCStart;
-import com.mohistmc.banner.config.BannerConfigUtil;
 import com.mohistmc.banner.stackdeobf.http.HttpUtil;
 import com.mohistmc.banner.stackdeobf.util.CompatUtil;
 import com.mohistmc.banner.util.I18n;

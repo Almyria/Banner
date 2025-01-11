@@ -5,19 +5,19 @@ package com.mohistmc.banner.stackdeobf.mappings.providers;
 import com.google.common.base.Preconditions;
 import com.mohistmc.banner.BannerMCStart;
 import com.mohistmc.banner.util.I18n;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import lombok.Getter;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.mappingio.MappingVisitor;
 
+@Getter
 public abstract class AbstractMappingProvider {
 
     protected final String name;
@@ -96,7 +96,4 @@ public abstract class AbstractMappingProvider {
 
     protected abstract CompletableFuture<Void> visitMappings0(MappingVisitor visitor, Executor executor);
 
-    public String getName() {
-        return this.name;
-    }
 }

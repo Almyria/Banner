@@ -3,17 +3,16 @@ package org.bukkit.craftbukkit.v1_20_R1.ban;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.net.InetAddresses;
-import net.minecraft.server.players.IpBanList;
-import net.minecraft.server.players.IpBanListEntry;
-import org.bukkit.BanEntry;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.net.InetAddress;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Set;
+import net.minecraft.server.players.IpBanList;
+import net.minecraft.server.players.IpBanListEntry;
+import org.bukkit.BanEntry;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CraftIpBanList implements org.bukkit.ban.IpBanList {
 

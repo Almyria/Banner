@@ -4,12 +4,6 @@ import com.mohistmc.banner.asm.EnumDefinalizer;
 import com.mohistmc.banner.asm.Implementer;
 import com.mohistmc.banner.asm.InventoryImplementer;
 import com.mohistmc.banner.asm.SwitchTableFixer;
-import net.fabricmc.loader.impl.game.patch.GameTransformer;
-import net.fabricmc.loader.impl.launch.FabricLauncher;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.tree.ClassNode;
-
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
@@ -18,6 +12,11 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import net.fabricmc.loader.impl.game.patch.GameTransformer;
+import net.fabricmc.loader.impl.launch.FabricLauncher;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.tree.ClassNode;
 
 public class BannerImplementer extends GameTransformer {
 

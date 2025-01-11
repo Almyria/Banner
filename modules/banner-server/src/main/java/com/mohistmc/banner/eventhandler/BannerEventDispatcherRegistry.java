@@ -2,7 +2,6 @@ package com.mohistmc.banner.eventhandler;
 
 import com.mohistmc.banner.BannerMod;
 import com.mohistmc.banner.eventhandler.dispatcher.EntityEventDispatcher;
-import com.mohistmc.banner.eventhandler.dispatcher.FabricToBukkitEventDispatcher;
 import com.mohistmc.banner.eventhandler.dispatcher.LevelEventDispatcher;
 import com.mohistmc.banner.eventhandler.dispatcher.PlayerEventDispatcher;
 import com.mohistmc.banner.util.I18n;

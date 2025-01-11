@@ -1,6 +1,7 @@
 package com.mohistmc.banner.asm;
 
 import com.mohistmc.banner.asm.annotation.InlineMethod;
+import java.lang.reflect.Modifier;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -11,8 +12,6 @@ import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import org.spongepowered.asm.util.Locals;
-
-import java.lang.reflect.Modifier;
 
 public class InlineMethodProcessor implements MixinProcessor {
 

@@ -2,12 +2,11 @@ package org.bukkit.craftbukkit.v1_20_R1.inventory;
 
 import com.google.common.base.Preconditions;
 import com.mohistmc.banner.bukkit.BukkitMethodHooks;
+import java.util.Iterator;
+import java.util.Map;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.bukkit.inventory.Recipe;
-
-import java.util.Iterator;
-import java.util.Map;
 
 public class RecipeIterator implements Iterator<Recipe> {
     private final Iterator<Map.Entry<RecipeType<?>, Map<ResourceLocation, net.minecraft.world.item.crafting.Recipe<?>>>> recipes;

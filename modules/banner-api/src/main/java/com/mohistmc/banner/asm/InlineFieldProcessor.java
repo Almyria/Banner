@@ -3,6 +3,9 @@ package com.mohistmc.banner.asm;
 import com.google.common.collect.MultimapBuilder;
 import com.mohistmc.banner.BannerMCStart;
 import com.mohistmc.banner.asm.annotation.InlineField;
+import java.lang.reflect.Modifier;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.ClassNode;
@@ -13,10 +16,6 @@ import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import org.spongepowered.asm.mixin.transformer.throwables.MixinApplicatorException;
-
-import java.lang.reflect.Modifier;
-import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public class InlineFieldProcessor implements MixinProcessor {
 

@@ -3,6 +3,12 @@ package org.bukkit.craftbukkit.v1_20_R1;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.mohistmc.banner.bukkit.BukkitMethodHooks;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Consumer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -189,13 +195,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 import org.bukkit.util.Vector;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.function.Consumer;
 
 public abstract class CraftRegionAccessor implements RegionAccessor {
 

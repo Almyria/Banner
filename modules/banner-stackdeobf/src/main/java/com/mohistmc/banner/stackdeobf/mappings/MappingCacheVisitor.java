@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import net.fabricmc.mappingio.MappedElementKind;
 import net.fabricmc.mappingio.MappingVisitor;
-import org.jetbrains.annotations.Nullable;
 
 public class MappingCacheVisitor implements MappingVisitor {
 

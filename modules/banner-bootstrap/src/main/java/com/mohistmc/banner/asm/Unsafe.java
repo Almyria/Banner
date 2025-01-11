@@ -1,8 +1,6 @@
 package com.mohistmc.banner.asm;
 
 
-import org.objectweb.asm.ClassReader;
-
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -11,6 +9,7 @@ import java.lang.reflect.Method;
 import java.security.ProtectionDomain;
 import java.util.Arrays;
 import java.util.Objects;
+import org.objectweb.asm.ClassReader;
 
 @SuppressWarnings("all")
 public class Unsafe {

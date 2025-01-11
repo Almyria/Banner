@@ -1,9 +1,8 @@
 package org.spigotmc;
 
+import com.mohistmc.banner.bukkit.BukkitMethodHooks;
 import java.io.File;
 import java.util.List;
-
-import com.mohistmc.banner.bukkit.BukkitMethodHooks;
 import net.minecraft.server.level.ServerPlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

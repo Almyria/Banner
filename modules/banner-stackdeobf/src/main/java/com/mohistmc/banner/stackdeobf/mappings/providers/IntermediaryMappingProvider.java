@@ -19,11 +19,13 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import lombok.Getter;
 import net.fabricmc.mappingio.MappingReader;
 import net.fabricmc.mappingio.MappingVisitor;
 import net.fabricmc.mappingio.format.MappingFormat;
 import net.fabricmc.mappingio.tree.MemoryMappingTree;
 
+@Getter
 public class IntermediaryMappingProvider extends AbstractMappingProvider {
 
     private static final String REPO_SITE = BannerConfigUtil.isCN() ? "https://repository.hanbings.io/proxy" : "https://maven.fabricmc.net";
@@ -84,11 +86,4 @@ public class IntermediaryMappingProvider extends AbstractMappingProvider {
         throw new UnsupportedOperationException();
     }
 
-    public Path getPath() {
-        return this.path;
-    }
-
-    public MemoryMappingTree getMappings() {
-        return this.mappings;
-    }
 }

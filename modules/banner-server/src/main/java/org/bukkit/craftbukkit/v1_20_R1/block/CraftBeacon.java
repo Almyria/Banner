@@ -1,6 +1,8 @@
 package org.bukkit.craftbukkit.v1_20_R1.block;
 
 import com.mohistmc.banner.bukkit.BukkitMethodHooks;
+import java.util.ArrayList;
+import java.util.Collection;
 import net.minecraft.world.LockCode;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
@@ -11,9 +13,6 @@ import org.bukkit.craftbukkit.v1_20_R1.util.CraftChatMessage;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class CraftBeacon extends CraftBlockEntityState<BeaconBlockEntity> implements Beacon {
 

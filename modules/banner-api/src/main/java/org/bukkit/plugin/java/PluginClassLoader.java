@@ -7,13 +7,6 @@ import com.mohistmc.banner.bukkit.remapping.ClassLoaderRemapper;
 import com.mohistmc.banner.bukkit.remapping.Remapper;
 import com.mohistmc.banner.bukkit.remapping.RemappingClassLoader;
 import io.izzel.tools.product.Product2;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.InvalidPluginException;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.SimplePluginManager;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,13 +19,18 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 import java.util.logging.Level;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.InvalidPluginException;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.SimplePluginManager;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A ClassLoader for plugins, to allow shared classes across multiple plugins

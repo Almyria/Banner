@@ -2,8 +2,10 @@ package com.mohistmc.banner.stackdeobf.mappings;
 
 // Created by booky10 in StackDeobfuscator (18:03 20.03.23)
 
+import lombok.Getter;
 import org.jetbrains.annotations.ApiStatus;
 
+@Getter
 @ApiStatus.Internal
 public class RemappedThrowable extends Throwable {
 
@@ -15,14 +17,6 @@ public class RemappedThrowable extends Throwable {
         super(message, cause);
         this.original = original;
         this.className = className;
-    }
-
-    public Throwable getOriginal() {
-        return this.original;
-    }
-
-    public String getClassName() {
-        return this.className;
     }
 
     @Override
