@@ -246,7 +246,6 @@ public abstract class MixinItemStack implements InjectionItemStack {
             CompoundTag newData = this.getTagClone();
             int newCount = this.getCount();
             this.setCount(oldCount);
-            this.setTagClone(oldData);
             if (interactionResult.consumesAction() && world.bridge$captureTreeGeneration() && !world.bridge$capturedBlockStates().isEmpty()) {
                 world.banner$setCaptureTreeGeneration(false);
                 Location location = CraftLocation.toBukkit(blockPos, world.getWorld());
@@ -290,7 +289,6 @@ public abstract class MixinItemStack implements InjectionItemStack {
                 } else if (blocks.size() == 1) {
                     placeEvent = CraftEventFactory.callBlockPlaceEvent(world, player, bannerHand, blocks.get(0), blockPos.getX(), blockPos.getY(), blockPos.getZ());
                 }
-
                 if (placeEvent != null && (placeEvent.isCancelled() || !placeEvent.canBuild())) {
                     interactionResult = InteractionResult.FAIL; // cancel placement
                     // PAIL: Remove this when MC-99075 fixed
@@ -402,10 +400,10 @@ public abstract class MixinItemStack implements InjectionItemStack {
                     }
                     player.awardStat(Stats.ITEM_USED.get(item));
                 }
-                world.bridge$capturedTileEntities().clear();
-                world.bridge$capturedBlockStates().clear();
-                // CraftBukkit end
             }
+            world.bridge$capturedTileEntities().clear();
+            world.bridge$capturedBlockStates().clear();
+            // CraftBukkit end
 
             return interactionResult;
         }
