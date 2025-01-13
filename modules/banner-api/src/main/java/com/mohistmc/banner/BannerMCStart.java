@@ -29,6 +29,9 @@ public class BannerMCStart {
             LOGGER.info("|_____/ /_/   |_| |_|  \\_| |_|  \\_| |_____| |_|  \\_\\ ");
             LOGGER.info(I18n.as("banner.launch.welcomemessage") + " - " + getVersion() + ", Java " + javaVersion);
         }
+        if(I18N.isCN()) {
+            System.out.printf("官方交流QQ群: 211128424%n");
+        }
         if (!EulaUtil.hasAcceptedEULA()) {
             System.out.println(I18n.as("eula"));
             while (!"true".equals(new Scanner(System.in).next()));
