@@ -183,28 +183,6 @@ allprojects {
 	}
 }
 
-def moduleDependencies(Project project, List<String> depNames) {
-	def deps = depNames.iterator().collect { project.dependencies.project(path: ":$it", configuration: "namedElements") }
-
-	depNames.iterator().forEachRemaining {
-		Project dependProject = findProject(":$it")
-		project.loom {
-			interfaceInjection {
-				interfaceInjectionSourceSets.add(dependProject.sourceSets.main)
-			}
-		}
-	}
-	project.dependencies {
-		deps.each {
-			api(implementation(it))
-		}
-	}
-}
-
-def getSubprojectVersion(project) {
-	return project.minecraft_version + "-" + ci_version()
-}
-
 dependencies {
 	include(project("banner-server"))
 	include(project("banner-plugin"))

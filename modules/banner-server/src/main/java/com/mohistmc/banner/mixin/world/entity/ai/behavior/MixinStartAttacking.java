@@ -36,8 +36,9 @@ public class MixinStartAttacking {
         if (event.getTarget() == null) {
             memoryAccessor.erase();
             cir.setReturnValue(true);
+        } else {
+            livingEntity = ((CraftLivingEntity) event.getTarget()).getHandle();
         }
-        livingEntity = ((CraftLivingEntity) event.getTarget()).getHandle();
         // CraftBukkit end
     }
 }
