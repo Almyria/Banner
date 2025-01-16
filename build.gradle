@@ -183,6 +183,28 @@ allprojects {
 	}
 }
 
+def moduleDependencies(Project project, List<String> depNames) {
+	def deps = depNames.iterator().collect { project.dependencies.project(path: ":$it", configuration: "namedElements") }
+
+	depNames.iterator().forEachRemaining {
+		Project dependProject = findProject(":$it")
+		project.loom {
+			interfaceInjection {
+				interfaceInjectionSourceSets.add(dependProject.sourceSets.main)
+			}
+		}
+	}
+	project.dependencies {
+		deps.each {
+			api(implementation(it))
+		}
+	}
+}
+
+def getSubprojectVersion(project) {
+	return project.minecraft_version + "-" + ci_version()
+}
+
 dependencies {
 	include(project("banner-server"))
 	include(project("banner-plugin"))
@@ -197,6 +219,7 @@ tasks.withType(JavaCompile).configureEach {
 
 jar {
 	from("LICENSE")
+	dependsOn 'createVersionFile'
 	manifest {
 		attributes(
 				'Main-Class': 'com.mohistmc.banner.BannerLauncher',
@@ -217,5 +240,23 @@ static String ci_version() {
 		return data.builds["number"][0]
 	} catch (Exception ignored) {
 		return "1.20.1"
+	}
+}
+
+tasks.register('createVersionFile') {
+	doLast {
+		def versionInfoFile = file("src/main/java/com/mohistmc/banner/VersionInfo.java")
+		def versionInfoContent = versionInfoFile.text
+
+		def versionMatcher = versionInfoContent =~ /public static final String VERSION = "(.*)";/
+
+		if (versionMatcher.find()) {
+			def currentVersion = versionMatcher.group(1)
+			def newVersion = Integer.parseInt(currentVersion) + 1
+			versionInfoContent = versionInfoContent.replaceAll(/public static final String VERSION = "(.*)";/, "public static final String VERSION = \"$newVersion\";")
+			versionInfoFile.text = versionInfoContent
+		} else {
+			throw new GradleException("Failed to find VERSION or BUILD_NUMBER in VersionInfo.java")
+		}
 	}
 }
