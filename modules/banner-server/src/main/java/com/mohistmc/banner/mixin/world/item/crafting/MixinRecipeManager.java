@@ -10,6 +10,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -50,6 +51,7 @@ public abstract class MixinRecipeManager implements InjectionRecipeManager {
     // Banner - fix mixin
     @Unique
     protected Map<RecipeType<?>, Object2ObjectLinkedOpenHashMap<ResourceLocation, Recipe<?>>> map1;
+
     /**
      * @author wdog5
      * @reason bukkit current recipe
@@ -60,9 +62,6 @@ public abstract class MixinRecipeManager implements InjectionRecipeManager {
 
         // CraftBukkit start - SPIGOT-5667 make sure all types are populated and mutable
         map1 = Maps.newHashMap();
-        for (RecipeType<?> recipeType : BuiltInRegistries.RECIPE_TYPE) {
-            map1.put(recipeType, new Object2ObjectLinkedOpenHashMap<>());
-        }
         // CraftBukkit end
 
         Map<RecipeType<?>, ImmutableMap.Builder<ResourceLocation, Recipe<?>>> map = Maps.newHashMap();
@@ -80,11 +79,8 @@ public abstract class MixinRecipeManager implements InjectionRecipeManager {
                     return ImmutableMap.builder();
                 }).put(resourceLocation, recipe);
 
-                // CraftBukkit start
-                (map1.computeIfAbsent(recipe.getType(), (recipes) -> {
-                    return new Object2ObjectLinkedOpenHashMap<>();
-                    // CraftBukkit end
-                })).put(resourceLocation, recipe);
+                fixMap1(recipe, resourceLocation); // Banner - fix mixin
+
                 builder.put(resourceLocation, recipe);
             } catch (IllegalArgumentException | JsonParseException jsonparseexception) {
                 LOGGER.error("Parsing error loading recipe {}", resourceLocation, jsonparseexception);
@@ -94,12 +90,21 @@ public abstract class MixinRecipeManager implements InjectionRecipeManager {
         this.recipes = map.entrySet().stream().collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, (p_44033_) -> {
             return p_44033_.getValue().build();
         }));
-        this.recipesCB = map1.entrySet().stream().collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, (entry1) -> {
-            return entry1.getValue(); // CraftBukkit
-        }));
+
+        this.recipesCB = map1.entrySet().stream().collect(ImmutableMap.toImmutableMap(Map.Entry::getKey, Entry::getValue));
         this.byName = Maps.newHashMap(builder.build()); // CraftBukkit
         LOGGER.info("Loaded {} recipes", (int)map.size());
     }
+
+    // Banner start - by @Mgazul
+    public void fixMap1(Recipe<?> recipe, ResourceLocation resourceLocation) {
+        if (recipe == null) return;
+        (map1.computeIfAbsent(recipe.getType(), (recipes) -> {
+            return new Object2ObjectLinkedOpenHashMap<>();
+            // CraftBukkit end
+        })).put(resourceLocation, recipe);
+    }
+    // Banner end
 
     /**
      * @author wdog5
