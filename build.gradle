@@ -3,7 +3,7 @@ plugins {
 	id 'maven-publish'
 }
 
-version = project.minecraft_version + "-" + ci_version()
+version = project.minecraft_version
 group = project.maven_group
 
 base {
@@ -202,7 +202,7 @@ def moduleDependencies(Project project, List<String> depNames) {
 }
 
 def getSubprojectVersion(project) {
-	return project.minecraft_version + "-" + ci_version()
+	return project.minecraft_version
 }
 
 dependencies {
@@ -219,44 +219,15 @@ tasks.withType(JavaCompile).configureEach {
 
 jar {
 	from("LICENSE")
-	dependsOn 'createVersionFile'
 	manifest {
 		attributes(
 				'Main-Class': 'com.mohistmc.banner.BannerLauncher',
 				'Specification-Title'   : 'Banner',
 				'Specification-Vendor'  : 'MohistMC',
-				'Specification-Version' : ci_version(),
+				'Specification-Version' : version,
 				'Implementation-Title'  : 'Banner',
 				'Implementation-Version': version,
 				'Implementation-Vendor' : 'MohistMC'
 		)
-	}
-}
-
-import groovy.json.JsonSlurper
-static String ci_version() {
-	try {
-		def data = new JsonSlurper().parseText(new URL("https://ci.codemc.io/job/MohistMC/job/Banner-1.20.1/api/json").getText("UTF-8"))
-		return data.builds["number"][0]
-	} catch (Exception ignored) {
-		return "1.20.1"
-	}
-}
-
-tasks.register('createVersionFile') {
-	doLast {
-		def versionInfoFile = file("src/main/java/com/mohistmc/banner/VersionInfo.java")
-		def versionInfoContent = versionInfoFile.text
-
-		def versionMatcher = versionInfoContent =~ /public static final String VERSION = "(.*)";/
-
-		if (versionMatcher.find()) {
-			def currentVersion = versionMatcher.group(1)
-			def newVersion = Integer.parseInt(currentVersion) + 1
-			versionInfoContent = versionInfoContent.replaceAll(/public static final String VERSION = "(.*)";/, "public static final String VERSION = \"$newVersion\";")
-			versionInfoFile.text = versionInfoContent
-		} else {
-			throw new GradleException("Failed to find VERSION or BUILD_NUMBER in VersionInfo.java")
-		}
 	}
 }
