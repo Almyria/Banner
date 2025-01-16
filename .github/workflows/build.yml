@@ -38,8 +38,8 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew cleaBuild build
-      - name: Upload API Lib
+      - name: Upload Jar
         uses: actions/upload-artifact@v4
         with:
           name: Banner API
-          path: ./banner-api/build/devlibs/*.jar
+          path: ./build/libs/*.jar
