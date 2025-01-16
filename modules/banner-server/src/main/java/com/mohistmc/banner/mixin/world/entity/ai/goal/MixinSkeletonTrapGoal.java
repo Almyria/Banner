@@ -5,7 +5,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.animal.horse.SkeletonHorse;
 import net.minecraft.world.entity.animal.horse.SkeletonTrapGoal;
-import net.minecraft.world.level.Level;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.weather.LightningStrikeEvent;
 import org.spongepowered.asm.mixin.Final;

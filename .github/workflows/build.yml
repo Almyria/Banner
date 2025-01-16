@@ -1,14 +1,13 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Build And Publish to Modrinth
+name: Build
 
 on : [push, pull_request]
 
 env:
   MINECRAFT_VERSION: 1.20.1
   VERSION: 1.20.1
-  MODRINTH_TOKEN: ${{ secrets.PUBLISH_MODRINTH_TOKEN }}
   RELEASE_NAME: banner-1.20.1
 
 jobs:
