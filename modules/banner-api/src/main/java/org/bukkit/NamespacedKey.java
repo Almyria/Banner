@@ -246,4 +246,21 @@ public final class NamespacedKey {
     public static NamespacedKey fromString(@NotNull String key) {
         return fromString(key, null);
     }
+
+    // Paper start
+    @NotNull
+    public String namespace() {
+        return this.getNamespace();
+    }
+
+    @NotNull
+    public String value() {
+        return this.getKey();
+    }
+
+    @NotNull
+    public String asString() {
+        return this.namespace + ':' + this.key;
+    }
+    // Paper end
 }
