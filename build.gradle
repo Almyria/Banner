@@ -1,9 +1,10 @@
 plugins {
 	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
+	id 'net.minecraftforge.gradleutils' version '[2.2,2.3)'
 }
 
-version = project.minecraft_version + "-" + buildNumber()
+version = project.minecraft_version + "-" + gradleutils.gitInfo.abbreviatedId
 group = project.maven_group
 
 base {
@@ -202,7 +203,7 @@ def moduleDependencies(Project project, List<String> depNames) {
 }
 
 def getSubprojectVersion(project) {
-	return project.minecraft_version + "-" + buildNumber()
+	return project.minecraft_version + "-" + gradleutils.gitInfo.abbreviatedId
 }
 
 dependencies {
@@ -224,18 +225,10 @@ jar {
 				'Main-Class': 'com.mohistmc.banner.BannerLauncher',
 				'Specification-Title'   : 'Banner',
 				'Specification-Vendor'  : 'MohistMC',
-				'Specification-Version' : buildNumber(),
+				'Specification-Version' : gradleutils.gitInfo.abbreviatedId,
 				'Implementation-Title'  : 'Banner',
 				'Implementation-Version': version,
 				'Implementation-Vendor' : 'MohistMC'
 		)
-	}
-}
-
-static String buildNumber() {
-	try {
-		return "git rev-list --count HEAD".execute().text.trim()
-	} catch (Exception ignored) {
-		return 'dev'
 	}
 }

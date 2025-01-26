@@ -2,7 +2,6 @@ package com.mohistmc.banner;
 
 import com.mohistmc.banner.eventhandler.BannerEventDispatcherRegistry;
 import net.fabricmc.api.DedicatedServerModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +18,6 @@ public class BannerMod implements DedicatedServerModInitializer {
     }
 
     public static String getVersion() {
-        return FabricLoader.getInstance().getModContainer("banner").get().getMetadata().getVersion().getFriendlyString();
+        return System.getProperty("banner.version");
     }
 }
