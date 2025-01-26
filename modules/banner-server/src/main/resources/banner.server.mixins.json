@@ -182,6 +182,7 @@
     "world.entity.animal.MixinSheep1",
     "world.entity.animal.MixinSniffer",
     "world.entity.animal.MixinSnowGolem",
+    "world.entity.animal.MixinMushroomCow",
     "world.entity.animal.MixinTurtle",
     "world.entity.animal.MixinTurtle_LayEggGoal",
     "world.entity.animal.MixinWolf",
