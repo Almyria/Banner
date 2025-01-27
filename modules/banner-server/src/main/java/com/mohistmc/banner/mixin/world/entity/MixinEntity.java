@@ -317,6 +317,13 @@ public abstract class MixinEntity implements Nameable, EntityAccess, CommandSour
         }
     }
 
+    @Inject(method = "handleNetherPortal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;changeDimension(Lnet/minecraft/server/level/ServerLevel;)Lnet/minecraft/world/entity/Entity;"))
+    public void banner$changeDimension(CallbackInfo ci) {
+        if ((Entity)(Object)this instanceof ServerPlayer serverPlayer) {
+            serverPlayer.pushChangeDimensionCause(PlayerTeleportEvent.TeleportCause.NETHER_PORTAL);
+        }
+    }
+
     public AtomicBoolean callEntityCombustEvent = new AtomicBoolean(true);
 
     @Override

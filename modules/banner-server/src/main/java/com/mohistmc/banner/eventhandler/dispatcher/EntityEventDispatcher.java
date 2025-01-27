@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class EntityEventDispatcher {
 
+    // TODO: not triggered
     public static void dispatchEntityEvent() {
         ServerEntityWorldChangeEvents.AFTER_ENTITY_CHANGE_WORLD.register((originalEntity, newEntity, origin, destination) -> {
             var pos = originalEntity.getOnPos();
@@ -36,6 +37,22 @@ public class EntityEventDispatcher {
             PlayerChangedWorldEvent changeEvent = new PlayerChangedWorldEvent(player.getBukkitEntity(), origin.getWorld());
             player.level().getCraftServer().getPluginManager().callEvent(changeEvent);
             // CraftBukkit end
+            var pos = player.getOnPos();
+            if (destination.getTypeKey() == LevelStem.NETHER) {
+                player.callPortalEvent(player, destination, new PositionImpl(pos.getX(), pos.getY(), pos.getZ()),
+                        PlayerTeleportEvent.TeleportCause.NETHER_PORTAL,
+                        16, 16);
+            }else if (destination.getTypeKey() == LevelStem.END) {
+                if (Bukkit.getAllowEnd()) {
+                    player.callPortalEvent(player, destination, new PositionImpl(pos.getX(), pos.getY(), pos.getZ()),
+                            PlayerTeleportEvent.TeleportCause.END_PORTAL,
+                            128, 16);
+                }
+            }else {
+                player.callPortalEvent(player, destination, new PositionImpl(pos.getX(), pos.getY(), pos.getZ()),
+                        PlayerTeleportEvent.TeleportCause.UNKNOWN,
+                        0, 0);
+            }
         });
 
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
