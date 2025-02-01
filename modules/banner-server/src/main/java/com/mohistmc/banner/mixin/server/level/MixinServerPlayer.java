@@ -644,7 +644,7 @@ public abstract class MixinServerPlayer extends Player implements InjectionServe
     private void banner$chunkLoad(ChunkPos chunkPos, Packet<?> packet, CallbackInfo ci) {
         // Paper start
         if(io.papermc.paper.event.packet.PlayerChunkLoadEvent.getHandlerList().getRegisteredListeners().length > 0){
-            new io.papermc.paper.event.packet.PlayerChunkLoadEvent(this.getBukkitEntity().getWorld().getChunkAt(chunkPos.x, chunkPos.z), this.getBukkitEntity()).callEvent();
+            new io.papermc.paper.event.packet.PlayerChunkLoadEvent(this.getBukkitEntity().getWorld().getChunkAt(chunkPos.toLong()), this.getBukkitEntity()).callEvent();
         }
         // Paper end
     }
@@ -656,7 +656,7 @@ public abstract class MixinServerPlayer extends Player implements InjectionServe
     private void banner$chunkUnload(ChunkPos chunkPos, CallbackInfo ci) {
         // Paper start
         if(io.papermc.paper.event.packet.PlayerChunkUnloadEvent.getHandlerList().getRegisteredListeners().length > 0){
-            new io.papermc.paper.event.packet.PlayerChunkUnloadEvent(this.getBukkitEntity().getWorld().getChunkAt(chunkPos.x, chunkPos.z), this.getBukkitEntity()).callEvent();
+            new io.papermc.paper.event.packet.PlayerChunkUnloadEvent(this.getBukkitEntity().getWorld().getChunkAt(chunkPos.toLong()), this.getBukkitEntity()).callEvent();
         }
         // Paper end
     }
