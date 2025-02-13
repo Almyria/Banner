@@ -86,6 +86,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -139,7 +140,6 @@ public abstract class MixinLivingEntity extends Entity implements InjectionLivin
     @Shadow public abstract boolean onClimbable();
     @Shadow public abstract void take(Entity entityIn, int quantity);
     @Shadow public abstract void setSprinting(boolean sprinting);
-    @Shadow public abstract void setItemInHand(InteractionHand hand, ItemStack stack);
     @Shadow public abstract RandomSource getRandom();
     @Shadow @Final private static EntityDataAccessor<Integer> DATA_EFFECT_COLOR_ID;
     @Shadow @Final private static EntityDataAccessor<Boolean> DATA_EFFECT_AMBIENCE_ID;
@@ -250,6 +250,13 @@ public abstract class MixinLivingEntity extends Entity implements InjectionLivin
             } else if (nbtbase.getId() == 3) {
                 this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(((IntTag) nbtbase).getAsDouble());
             }
+        }
+    }
+
+    @Inject(method = "baseTick", cancellable = true, at = @At("HEAD"))
+    public void banner$baseTick(CallbackInfo ci) {
+        if (Bukkit.getTPS()[0] < 15) {
+            ci.cancel();
         }
     }
 
@@ -609,6 +616,11 @@ public abstract class MixinLivingEntity extends Entity implements InjectionLivin
         }
     }
 
+    @Unique
+    net.minecraft.world.item.ItemStack banner$itemstack = null;
+    @Unique
+    net.minecraft.world.item.ItemStack banner$itemstack1 = ItemStack.EMPTY;
+
     /**
      * @author wdog5
      * @reason
@@ -618,33 +630,29 @@ public abstract class MixinLivingEntity extends Entity implements InjectionLivin
         if (damageSourceIn.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return false;
         } else {
-            net.minecraft.world.item.ItemStack itemstack = null;
-            net.minecraft.world.item.ItemStack itemstack1 = ItemStack.EMPTY;
-            org.bukkit.inventory.EquipmentSlot bukkitHand = null;
-            InteractionHand[] var4 = InteractionHand.values();
-            int var5 = var4.length;
 
-            for(int var6 = 0; var6 < var5; ++var6) {
-                InteractionHand interactionHand = var4[var6];
-                itemstack1 = this.getItemInHand(interactionHand);
-                if (itemstack1.is(Items.TOTEM_OF_UNDYING)) {
-                    itemstack = itemstack1.copy();
+            org.bukkit.inventory.EquipmentSlot bukkitHand = null;
+            for(InteractionHand interactionHand : InteractionHand.values()) {
+                ItemStack itemStack2 = this.getItemInHand(interactionHand);
+                banner$itemstack1 = itemStack2;
+                if (itemStack2.is(Items.TOTEM_OF_UNDYING)) {
+                    banner$itemstack = itemStack2.copy();
                     bukkitHand = CraftEquipmentSlot.getHand(interactionHand);
                     break;
                 }
             }
 
             EntityResurrectEvent event = new EntityResurrectEvent((org.bukkit.entity.LivingEntity) this.getBukkitEntity(), bukkitHand);
-            event.setCancelled(itemstack == null);
+            event.setCancelled(banner$itemstack == null);
             Bukkit.getPluginManager().callEvent(event);
 
             if (!event.isCancelled()) {
-                if (!itemstack1.isEmpty()) {
-                    itemstack1.shrink(1);
+                if (!banner$itemstack1.isEmpty()) {
+                    banner$itemstack1.shrink(1);
                 }
-                if (itemstack != null && (Object) this instanceof ServerPlayer serverplayerentity) {
+                if (banner$itemstack != null && (Object) this instanceof ServerPlayer serverplayerentity) {
                     serverplayerentity.awardStat(Stats.ITEM_USED.get(Items.TOTEM_OF_UNDYING));
-                    CriteriaTriggers.USED_TOTEM.trigger(serverplayerentity, itemstack);
+                    CriteriaTriggers.USED_TOTEM.trigger(serverplayerentity, banner$itemstack);
                 }
 
                 this.setHealth(1.0F);
