@@ -43,52 +43,6 @@ public class PlayerEventDispatcher {
                 explodeBed(entity.getBlockStateOn(), entity.level(), entity.getOnPos());
             }
         });
-        UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-            if (hitResult == null) return InteractionResult.PASS;
-            if (player instanceof ServerPlayer serverPlayer) {
-                PlayerInteractEntityEvent event;
-                Vec3 vec3 = hitResult.getLocation();
-                if (vec3 != null) {
-                    event = new PlayerInteractAtEntityEvent((Player) serverPlayer.getBukkitEntity(), entity.getBukkitEntity(),
-                            new org.bukkit.util.Vector(vec3.x, vec3.y, vec3.z), (hand == InteractionHand.OFF_HAND) ? EquipmentSlot.OFF_HAND : EquipmentSlot.HAND);
-                } else {
-                    event = new PlayerInteractEntityEvent((Player) serverPlayer.getBukkitEntity(), entity.getBukkitEntity(), (hand == InteractionHand.OFF_HAND) ? EquipmentSlot.OFF_HAND : EquipmentSlot.HAND);
-                }
-                ItemStack itemInHand = serverPlayer.getItemInHand(hand);
-                boolean triggerLeashUpdate = itemInHand != null && itemInHand.getItem() == Items.LEAD && entity instanceof Mob;
-                Item origItem = serverPlayer.getInventory().getSelected() == null ? null : serverPlayer.getInventory().getSelected().getItem();
-                Bukkit.getPluginManager().callEvent(event);
-
-                // Fish bucket - SPIGOT-4048
-                if ((entity instanceof Bucketable && entity instanceof LivingEntity && origItem != null && origItem.asItem() == Items.WATER_BUCKET) && (event.isCancelled() || serverPlayer.getInventory().getSelected() == null || player.getInventory().getSelected().getItem() != origItem)) {
-                    serverPlayer.connection.send(new ClientboundAddEntityPacket(entity));
-                    player.containerMenu.sendAllDataToRemote();
-                }
-
-                if (triggerLeashUpdate && (event.isCancelled() || player.getInventory().getSelected() == null || player.getInventory().getSelected().getItem() != origItem)) {
-                    // Refresh the current leash state
-                    serverPlayer.connection.send(new ClientboundSetEntityLinkPacket(entity, ((Mob) entity).getLeashHolder()));
-                }
-
-                if (event.isCancelled() || serverPlayer.getInventory().getSelected() == null || serverPlayer.getInventory().getSelected().getItem() != origItem) {
-                    // Refresh the current entity metadata
-                    entity.getEntityData().refresh(serverPlayer);
-                    if (entity instanceof Allay) {
-                        serverPlayer.connection.send(new ClientboundSetEquipmentPacket(entity.getId(), Arrays.stream(net.minecraft.world.entity.EquipmentSlot.values()).map((slot) -> Pair.of(slot, ((LivingEntity) entity).getItemBySlot(slot).copy())).collect(Collectors.toList())));
-                        serverPlayer.containerMenu.sendAllDataToRemote();
-                    }
-                }
-
-                if (event.isCancelled()) {
-                    return InteractionResult.PASS;
-                }
-                if (!itemInHand.isEmpty() && itemInHand.getCount() <= -1) {
-                    serverPlayer.containerMenu.sendAllDataToRemote();
-                }
-            }
-
-            return InteractionResult.PASS;
-        });
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
             BukkitSnapshotCaptures.capturePlaceEventHand(hand);
             BukkitSnapshotCaptures.getPlaceEventHand(InteractionHand.MAIN_HAND);

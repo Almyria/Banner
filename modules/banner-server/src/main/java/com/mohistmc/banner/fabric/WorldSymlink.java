@@ -23,10 +23,7 @@ public class WorldSymlink {
                 }
                 Files.createSymbolicLink(source, dest);
             }
-        } catch (UnsupportedOperationException e) {
-            BannerMod.LOGGER.warn(I18n.as("error-symlink"), e);
-        } catch (IOException e) {
-            BannerMod.LOGGER.error("Error creating symlink", e);
+        } catch (Exception ignored) {
         }
     }
 }
