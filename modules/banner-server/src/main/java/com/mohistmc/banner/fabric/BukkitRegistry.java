@@ -6,7 +6,6 @@ import com.google.common.collect.ImmutableMap;
 import com.mohistmc.banner.BannerMod;
 import com.mohistmc.banner.api.ServerAPI;
 import com.mohistmc.banner.bukkit.MaterialHelper;
-import com.mohistmc.banner.bukkit.type.BannerPotionEffect;
 import com.mohistmc.banner.util.I18n;
 import com.mohistmc.dynamicenum.MohistDynamEnum;
 import java.util.ArrayList;
@@ -54,6 +53,7 @@ import org.bukkit.craftbukkit.v1_20_R1.block.CraftHangingSign;
 import org.bukkit.craftbukkit.v1_20_R1.block.CraftSign;
 import org.bukkit.craftbukkit.v1_20_R1.enchantments.CraftEnchantment;
 import org.bukkit.craftbukkit.v1_20_R1.inventory.CraftRecipe;
+import org.bukkit.craftbukkit.v1_20_R1.potion.CraftPotionEffectType;
 import org.bukkit.craftbukkit.v1_20_R1.potion.CraftPotionUtil;
 import org.bukkit.craftbukkit.v1_20_R1.util.CraftMagicNumbers;
 import org.bukkit.craftbukkit.v1_20_R1.util.CraftNamespacedKey;
@@ -339,11 +339,12 @@ public class BukkitRegistry {
     }
 
     private static void loadPotions() {
-        for (MobEffect eff : BuiltInRegistries.MOB_EFFECT) {
+        var registry_effect = BuiltInRegistries.MOB_EFFECT;
+        for (MobEffect eff : registry_effect) {
             try {
-                var location = BuiltInRegistries.MOB_EFFECT.getKey(eff);
+                var location = registry_effect.getKey(eff);
                 String name = normalizeName(location.toString());
-                BannerPotionEffect effect = new BannerPotionEffect(eff, name);
+                CraftPotionEffectType effect = new CraftPotionEffectType(eff, name);
                 PotionEffectType.registerPotionEffectType(effect);
                 CraftPotionUtil.mods_map.put(effect.getId(), effect);
                 BannerMod.LOGGER.debug("Registered {} as potion {}", location, effect);
